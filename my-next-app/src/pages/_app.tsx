@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
-import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
+import store from '../store/Store';
+import { Provider } from 'react-redux';
 
 const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
@@ -24,12 +25,13 @@ const App = ({ Component, pageProps: {...pageProps } }) => {
   return (
     <Fragment>
     <ColorModeContext.Provider value={colorMode} >
-     
+      <Provider store={store}>
           <CssBaseline />
           <Header ColorModeContext={ColorModeContext} />
           <Layout>
             <Component {...pageProps} />
           </Layout>
+      </Provider>
     </ColorModeContext.Provider>
     </Fragment>
   );
